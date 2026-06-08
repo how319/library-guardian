@@ -190,24 +190,38 @@ function drawEnding4() {
   fill(255, abs(sin(frameCount * 0.04)) * 180 + 75); textSize(12); text("[마우스 클릭 또는 스페이스바를 누르면 최종 결과 창으로]", width / 2, height - 45);
 }
 
+
 function drawEnding5() {
-	background(12, 16, 26); 
-	stroke(0, 255, 200, 100); 
-	strokeWeight(2); 
-	noFill(); 
-	rect(40, 40, width - 80, height - 80, 16);
-  textAlign(CENTER, CENTER); 
-	fill(0, 255, 200); 
-	textSize(35); 
-	noStroke(); 
-	text("도서관 수호자 (The Library Guardian): 흔적의 미로", width / 2, height * 0.25);
-  fill(240); textSize(21); 
-	text(`서가 구역 ${stage + 1} [${STAGE_NAMES[stage]}] 복원 완료!`, width / 2, height * 0.36);
-  fill(200); textSize(16); text("🎉 축하합니다! 위대한 고서들이 모두 원래 자리를 찾았습니다.", width / 2, height * 0.44);
-  let btnW = 260, btnH = 55, btnGap = 50, btn1X = width / 2 - btnW - btnGap / 2, btn2X = width / 2 + btnGap / 2, btnY = height * 0.62;
-  let h1 = mouseX > btn1X && mouseX < btn1X + btnW && mouseY > btnY && mouseY < btnY + btnH;
-  let h2 = mouseX > btn2X && mouseX < btn2X + btnW && mouseY > btnY && mouseY < btnY + btnH;
-  fill(h1 ? color(0, 230, 150) : color(0, 150, 100)); if (h1) cursor(HAND); rect(btn1X, btnY, btnW, btnH, 8); fill(20); textSize(18); text("서가 선택으로 돌아가기", btn1X + btnW / 2, btnY + btnH / 2);
-  fill(h2 ? color(0, 200, 255) : color(0, 120, 180)); if (h2) cursor(HAND); rect(btn2X, btnY, btnW, btnH, 8); fill(20); textSize(18); text("메인 타이틀로 이동", btn2X + btnW / 2, btnY + btnH / 2);
-  if (!h1 && !h2) cursor(ARROW);
+  background(12, 16, 26);
+  stroke(0, 255, 200, 100); strokeWeight(2); noFill();
+  rect(40, 40, width - 80, height - 80, 16);
+  textAlign(CENTER, CENTER); fill(0, 255, 200);
+  textSize(min(32, width / 22)); noStroke();
+  text("도서관 수호자 (The Library Guardian): 흔적의 미로", width / 2, height * 0.23);
+  fill(240); textSize(min(20, width / 36));
+  text(`서가 구역 ${stage + 1} [${STAGE_NAMES[stage]}] 복원 완료!`, width / 2, height * 0.34);
+  fill(200); textSize(min(15, width / 52));
+  text("🎉 축하합니다! 위대한 고서들이 모두 원래 자리를 찾았습니다.", width / 2, height * 0.42);
+
+  let btnW = min(220, width * 0.26), btnH = 52, btnGap = 28;
+  let totalW = btnW * 3 + btnGap * 2;
+  let b1X = width / 2 - totalW / 2;
+  let b2X = b1X + btnW + btnGap;
+  let b3X = b2X + btnW + btnGap;
+  let btnY = height * 0.56;
+
+  let h1 = mouseX > b1X && mouseX < b1X + btnW && mouseY > btnY && mouseY < btnY + btnH;
+  let h2 = mouseX > b2X && mouseX < b2X + btnW && mouseY > btnY && mouseY < btnY + btnH;
+  let h3 = mouseX > b3X && mouseX < b3X + btnW && mouseY > btnY && mouseY < btnY + btnH;
+
+  fill(h1 ? color(0, 230, 150) : color(0, 150, 100)); if (h1) cursor(HAND);
+  rect(b1X, btnY, btnW, btnH, 8); fill(15); textSize(15); text("서가 선택으로 돌아가기", b1X + btnW / 2, btnY + btnH / 2);
+
+  fill(h2 ? color(0, 255, 200) : color(0, 140, 140)); if (h2) cursor(HAND);
+  rect(b2X, btnY, btnW, btnH, 8); fill(15); textSize(15); text("엔딩 크레딧 보기", b2X + btnW / 2, btnY + btnH / 2);
+
+  fill(h3 ? color(0, 200, 255) : color(0, 120, 180)); if (h3) cursor(HAND);
+  rect(b3X, btnY, btnW, btnH, 8); fill(15); textSize(15); text("메인 타이틀로 이동", b3X + btnW / 2, btnY + btnH / 2);
+
+  if (!h1 && !h2 && !h3) cursor(ARROW);
 }
