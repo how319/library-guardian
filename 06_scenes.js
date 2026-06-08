@@ -1,30 +1,47 @@
-// ====================================================
 // 06_scenes.js — 씬 드로잉 (타이틀, 프롤로그, 선택, 클리어, 엔딩)
-// ====================================================
 
-// ────────────────────────────────────────────────────
 // 타이틀 화면
-// ────────────────────────────────────────────────────
+
 function drawIntroTitle() {
-  drawLibraryBackgroundSimple(); fill(0, 0, 0, 140); noStroke(); rect(0, 0, width, height);
-  textAlign(CENTER, CENTER); fill(0, 255, 200); textSize(32); noStroke();
+  drawLibraryBackgroundSimple(); 
+	fill(0, 0, 0, 140); 
+	noStroke(); 
+	rect(0, 0, width, height);
+  textAlign(CENTER, CENTER); 
+	fill(0, 255, 200); 
+	textSize(32); 
+	noStroke();
   text("도서관 수호자 (The Library Guardian): 흔적의 미로", width / 2, height / 2 - 40);
   let btnX = width / 2 - 110, btnY = height / 2 + 50, btnW = 220, btnH = 55;
   let hover = mouseX > btnX && mouseX < btnX + btnW && mouseY > btnY && mouseY < btnY + btnH;
-  fill(hover ? color(0, 255, 200) : color(0, 160, 130)); cursor(hover ? HAND : ARROW); rect(btnX, btnY, btnW, btnH, 10);
-  fill(20); textSize(20); noStroke(); text("게임 시작", width / 2, btnY + btnH / 2);
+  fill(hover ? color(0, 255, 200) : color(0, 160, 130)); 
+  cursor(hover ? HAND : ARROW); 
+  rect(btnX, btnY, btnW, btnH, 10);
+  fill(20); 
+  textSize(20); 
+  noStroke(); 
+  text("게임 시작", width / 2, btnY + btnH / 2);
 }
 
-// ────────────────────────────────────────────────────
 // 프롤로그 씬들
-// ────────────────────────────────────────────────────
-function drawPrologueCam() {
-  cursor(ARROW); introTimer += 0.005;
+  function drawPrologueCam() {
+  cursor(ARROW); 
+	introTimer += 0.005;
   let zoom = map(min(introTimer, 1), 0, 1, 0.8, 2.2), wormWorldX = width / 2, wormWorldY = height / 2 + 90;
-  push(); translate(width / 2, height / 2); scale(zoom); translate(-wormWorldX, -wormWorldY);
-  drawLibraryBackgroundSimple(); let sleepWiggle = sin(frameCount * 0.05) * 2;
-  drawBookwormCharacter(wormWorldX, wormWorldY + sleepWiggle, 100, true, false, false, false, false); pop();
-  fill(0, 0, 0, 200); rect(0, height - 120, width, 120); fill(255); noStroke(); textSize(18); textAlign(CENTER, CENTER);
+  push(); 
+	translate(width / 2, height / 2); 
+	scale(zoom); 
+	translate(-wormWorldX, -wormWorldY);
+  drawLibraryBackgroundSimple(); 
+	let sleepWiggle = sin(frameCount * 0.05) * 2;
+  drawBookwormCharacter(wormWorldX, wormWorldY + sleepWiggle, 100, true, false, false, false, false); 
+	pop();
+  fill(0, 0, 0, 200); 
+	rect(0, height - 120, width, 120); 
+	fill(255); 
+	noStroke(); 
+	textSize(18); 
+	textAlign(CENTER, CENTER);
   text("숭실도서관 책장 위에서 곤히 단잠을 자고 있는 귀여운 책벌레", width / 2, height - 75);
   fill(150, 160, 180, abs(sin(frameCount * 0.04)) * 180 + 75); textSize(12); text("[마우스 클릭 또는 스페이스바를 누르면 다음으로]", width / 2, height - 30);
 }
@@ -71,9 +88,7 @@ function drawPrologueGuide() {
   fill(0, 255, 200, abs(sin(frameCount * 0.04)) * 200 + 55); textSize(min(15, width / 55)); text("아무 키나 누르거나 클릭하여 서가 선택 화면으로", width / 2, height * 0.84);
 }
 
-// ────────────────────────────────────────────────────
 // 서가 선택 화면
-// ────────────────────────────────────────────────────
 function drawSelectMenu() {
   background(10, 12, 18); stroke(30, 35, 50, 60);
   for (let x = 0; x < width; x += 50) line(x, 0, x, height);
@@ -100,10 +115,8 @@ function drawSelectMenu() {
   if (!stageButtons.some(b => b.unlocked && mouseX > b.x && mouseX < b.x + b.w && mouseY > b.y && mouseY < b.y + b.h)) cursor(ARROW);
 }
 
-// ────────────────────────────────────────────────────
 // 스테이지 클리어
-// ────────────────────────────────────────────────────
-function drawStageClear() {
+  function drawStageClear() {
   clearTimer++; background(8, 14, 22);
   for (let i = 0; i < 3; i++) { let rx = random(width), ry = random(height); fill(0, 255, 200, random(30, 80)); noStroke(); ellipse(rx, ry, random(2, 5)); }
   stroke(0, 255, 200, 80); strokeWeight(2); noFill(); rect(40, 40, width - 80, height - 80, 16);
@@ -116,9 +129,7 @@ function drawStageClear() {
   fill(150, 160, 180, abs(sin(clearTimer * 0.06)) * 180 + 75); textSize(12); text("[마우스 클릭 또는 아무 키나 눌러 서가 선택으로 돌아가기]", width / 2, height * 0.88);
 }
 
-// ────────────────────────────────────────────────────
 // 게임오버
-// ────────────────────────────────────────────────────
 function drawGameover() {
   background(8, 0, 0, 210); fill(255, 60, 60); noStroke(); textSize(min(24, width / 28)); textAlign(CENTER, CENTER);
   text('서가의 문장이 완전히 소멸되었습니다', width / 2, height / 2 - 50);
@@ -126,9 +137,7 @@ function drawGameover() {
   fill(0, 255, 200, abs(sin(frameCount * 0.06)) * 200 + 55); textSize(min(13, width / 60)); text('R 키를 눌러 서가 선택으로 돌아가기', width / 2, height / 2 + 40);
 }
 
-// ────────────────────────────────────────────────────
 // 엔딩 씬들
-// ────────────────────────────────────────────────────
 function drawEnding1() {
   drawEatingBackground(); endingTimer += 1;
   let vX = width * 0.5, vY = height * 0.55 + sin(frameCount * 0.3) * 5;
@@ -182,9 +191,18 @@ function drawEnding4() {
 }
 
 function drawEnding5() {
-  background(12, 16, 26); stroke(0, 255, 200, 100); strokeWeight(2); noFill(); rect(40, 40, width - 80, height - 80, 16);
-  textAlign(CENTER, CENTER); fill(0, 255, 200); textSize(35); noStroke(); text("도서관 수호자 (The Library Guardian): 흔적의 미로", width / 2, height * 0.25);
-  fill(240); textSize(21); text(`서가 구역 ${stage + 1} [${STAGE_NAMES[stage]}] 복원 완료!`, width / 2, height * 0.36);
+	background(12, 16, 26); 
+	stroke(0, 255, 200, 100); 
+	strokeWeight(2); 
+	noFill(); 
+	rect(40, 40, width - 80, height - 80, 16);
+  textAlign(CENTER, CENTER); 
+	fill(0, 255, 200); 
+	textSize(35); 
+	noStroke(); 
+	text("도서관 수호자 (The Library Guardian): 흔적의 미로", width / 2, height * 0.25);
+  fill(240); textSize(21); 
+	text(`서가 구역 ${stage + 1} [${STAGE_NAMES[stage]}] 복원 완료!`, width / 2, height * 0.36);
   fill(200); textSize(16); text("🎉 축하합니다! 위대한 고서들이 모두 원래 자리를 찾았습니다.", width / 2, height * 0.44);
   let btnW = 260, btnH = 55, btnGap = 50, btn1X = width / 2 - btnW - btnGap / 2, btn2X = width / 2 + btnGap / 2, btnY = height * 0.62;
   let h1 = mouseX > btn1X && mouseX < btn1X + btnW && mouseY > btnY && mouseY < btnY + btnH;
