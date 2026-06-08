@@ -3,7 +3,6 @@
 let libraryShelves = [];
 
 // 도서관 배경 생성 (게임 플레이 중 스크롤 배경)
-/
 function generateLibraryBackground() {
   libraryShelves = [];
   randomSeed(99);
