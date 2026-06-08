@@ -1,11 +1,6 @@
-// ====================================================
 // 09_effects.js — 파티클, 식물, 반딧불, 흡입 이펙트
-// ====================================================
-
-// ────────────────────────────────────────────────────
 // 파티클 (글자 먹을 때 터지는 이펙트)
-// ────────────────────────────────────────────────────
-function spawnParticles(x, y) {
+  function spawnParticles(x, y) {
   for (let i = 0; i < 15; i++)
     particles.push({ x, y, vx: random(-3, 3), vy: random(-3, 3), alpha: 255, color: color(50, 255, 200) });
 }
@@ -23,10 +18,8 @@ function drawParticles() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 식물 이펙트 (글자 먹을 때 주변에 꽃/풀 생성)
-// ────────────────────────────────────────────────────
-function spawnVegetation(x, y) {
+  function spawnVegetation(x, y) {
   for (let i = 0; i < floor(random(2, 4)); i++) {
     let type = random(['grass', 'flower']);
     vegetation.push({
@@ -52,9 +45,7 @@ function drawVegetation() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 반딧불 (글자 주변을 떠도는 빛)
-// ────────────────────────────────────────────────────
 function initFirefliesForStage() {
   fireflies = [];
   for (let c of chars)
@@ -73,10 +64,8 @@ function drawFireflies() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 흡입 이펙트 (보스 퀴즈 화면 블랙홀로 빨려드는 파티클)
-// ────────────────────────────────────────────────────
-function initSuctionEffect() {
+  function initSuctionEffect() {
   suctionParticles = [];
   let pool = ['0','1','NULL','VOID','ERR','소거','망각','흡입','LIMIT'];
   for (let i = 0; i < 120; i++)
