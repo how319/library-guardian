@@ -22,7 +22,7 @@ function handleFade() {
 function handleHiddenInput() {
   let val = this.value(); if (val.length === 0) return;
   let raw = val.charAt(0); this.value('');
-  if (['gameover','ending_1','ending_2','ending_3','ending_4','ending_5'].includes(state)) return;
+  if (['gameover','ending_1','ending_2','ending_3','ending_4','ending_5','credits_1','credits_2','credits_3'].includes(state)) return;
   if (state === 'prologue_cam')     { startFadeTo('prologue_shake');   return; }
   if (state === 'prologue_shake')   { startFadeTo('prologue_villain'); return; }
   if (state === 'prologue_villain') { startFadeTo('prologue_angry');   return; }
@@ -102,7 +102,8 @@ function mousePressed() {
   }
   if (state === 'intro_title') {
     let btnX = width / 2 - 110, btnY = height / 2 + 50, btnW = 220, btnH = 55;
-    if (mouseX > btnX && mouseX < btnX + btnW && mouseY > btnY && mouseY < btnY + btnH) startFadeTo('prologue_cam'); return;
+    if (mouseX > btnX && mouseX < btnX + btnW && mouseY > btnY && mouseY < btnY + btnH) startFadeTo('prologue_cam');
+    return;
   }
   if (state === 'prologue_cam')     { startFadeTo('prologue_shake');   return; }
   if (state === 'prologue_shake')   { startFadeTo('prologue_villain'); return; }
@@ -126,11 +127,16 @@ function mousePressed() {
   }
   if (state === 'ending_2') { startFadeTo('ending_3'); return; }
   if (state === 'ending_4') { startFadeTo('ending_5'); return; }
+  if (state === 'credits_1') { startFadeTo('credits_2'); return; }
+  if (state === 'credits_2') { startFadeTo('credits_3'); return; }
+  if (state === 'credits_3') { startFadeTo('intro_title'); return; }
   if (state === 'ending_5') {
-    let btnW = 260, btnH = 55, btnGap = 50;
-    let btn1X = width / 2 - btnW - btnGap / 2, btn2X = width / 2 + btnGap / 2, btnY = height * 0.62;
-    if (mouseX > btn1X && mouseX < btn1X + btnW && mouseY > btnY && mouseY < btnY + btnH) { startFadeTo('select'); return; }
-    if (mouseX > btn2X && mouseX < btn2X + btnW && mouseY > btnY && mouseY < btnY + btnH) { startFadeTo('intro_title'); return; }
+    let btnW = min(220, width * 0.26), btnH = 52, btnGap = 28;
+    let totalW = btnW * 3 + btnGap * 2;
+    let b1X = width / 2 - totalW / 2, b2X = b1X + btnW + btnGap, b3X = b2X + btnW + btnGap, btnY = height * 0.56;
+    if (mouseX > b1X && mouseX < b1X + btnW && mouseY > btnY && mouseY < btnY + btnH) { startFadeTo('select'); return; }
+    if (mouseX > b2X && mouseX < b2X + btnW && mouseY > btnY && mouseY < btnY + btnH) { startFadeTo('credits_1'); return; }
+    if (mouseX > b3X && mouseX < b3X + btnW && mouseY > btnY && mouseY < btnY + btnH) { startFadeTo('intro_title'); return; }
   }
 }
 
@@ -162,6 +168,9 @@ function keyPressed() {
     if (state === 'stage_clear')      { goToSelectAfterClear();          return false; }
     if (state === 'ending_2')         { startFadeTo('ending_3');         return false; }
     if (state === 'ending_4')         { startFadeTo('ending_5');         return false; }
+    if (state === 'credits_1')         { startFadeTo('credits_2');         return false; }
+    if (state === 'credits_2')         { startFadeTo('credits_3');         return false; }
+    if (state === 'credits_3')         { startFadeTo('intro_title');       return false; }
   }
   if (state === 'gameover' && (key === 'r' || key === 'R' || key === 'ㄱ')) {
     state = 'select'; _bgmTrack = ''; bgmUpdateForState('select', stage); return false;
