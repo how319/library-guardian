@@ -1,7 +1,4 @@
-// ====================================================
 // 12_main.js — p5.js 진입점 (setup, draw)
-// ====================================================
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont('monospace');
