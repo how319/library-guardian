@@ -1,10 +1,5 @@
-// ====================================================
 // 11_input.js — 입력 처리 (키보드, 마우스, 페이드 전환)
-// ====================================================
-
-// ────────────────────────────────────────────────────
 // 페이드 전환
-// ────────────────────────────────────────────────────
 function startFadeTo(nextState) { fadeMode = 'out'; nextStateAfterFade = nextState; }
 
 function handleFade() {
@@ -23,9 +18,7 @@ function handleFade() {
   if (fadeAlpha > 0) { fill(0, fadeAlpha); noStroke(); rect(0, 0, width, height); }
 }
 
-// ────────────────────────────────────────────────────
 // 히든 인풋 (타자 입력)
-// ────────────────────────────────────────────────────
 function handleHiddenInput() {
   let val = this.value(); if (val.length === 0) return;
   let raw = val.charAt(0); this.value('');
@@ -57,9 +50,8 @@ function handleHiddenInput() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 보스 정답 처리
-// ────────────────────────────────────────────────────
+
 function submitBossAnswer(ans) {
   sfxOXClick();
   if (currentBossQuizIdx >= currentBossQuizData.length) return;
@@ -78,17 +70,13 @@ function submitBossAnswer(ans) {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 클리어 후 선택 화면으로
-// ────────────────────────────────────────────────────
 function goToSelectAfterClear() {
   if (stage + 1 === unlockedStages && unlockedStages < TOTAL_STAGES) unlockedStages++;
   startFadeTo('select');
 }
 
-// ────────────────────────────────────────────────────
 // 일시정지 옵션 실행
-// ────────────────────────────────────────────────────
 function executePauseOption(idx) {
   isPaused = false; pauseSelectedOption = 0;
   if (idx === 0) hiddenInput.elt.focus();
@@ -96,9 +84,8 @@ function executePauseOption(idx) {
   else if (idx === 2) startFadeTo('select');
 }
 
-// ────────────────────────────────────────────────────
+
 // 마우스 이벤트
-// ────────────────────────────────────────────────────
 function mousePressed() {
   if (state === 'playing' && isPaused) {
     let pw = min(420, width * 0.8), py = height / 2 - 160, px = width / 2 - pw / 2;
@@ -147,9 +134,7 @@ function mousePressed() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 키보드 이벤트
-// ────────────────────────────────────────────────────
 function keyPressed() {
   if (keyCode === ESCAPE && state === 'playing') {
     isPaused = !isPaused; if (!isPaused) { pauseSelectedOption = 0; hiddenInput.elt.focus(); } return false;
