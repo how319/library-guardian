@@ -1,10 +1,5 @@
-// ====================================================
 // 07_gameplay.js — 게임플레이 HUD, 보스 퀴즈, 일시정지
-// ====================================================
-
-// ────────────────────────────────────────────────────
 // 게임 메인 드로우 (플레이 중)
-// ────────────────────────────────────────────────────
 function drawGame() {
   if (isPaused) { drawPauseOverlay(); return; }
   let elapsed = frameCount - stageStartFrame;
@@ -22,9 +17,8 @@ function drawGame() {
   drawHUD(); drawPauseButton();
 }
 
-// ────────────────────────────────────────────────────
 // HUD (진행도, 위치 표시)
-// ────────────────────────────────────────────────────
+
 function drawHUD() {
   fill(16, 20, 30, 220); stroke(0, 255, 200, 50); strokeWeight(1); rect(15, 15, 280, 65, 4);
   fill(0, 255, 200); noStroke(); textSize(11); textAlign(LEFT, TOP); text("● IN-LIBRARY INDEX MONITOR", 28, 25);
@@ -49,9 +43,7 @@ function drawHUD() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 일시정지 오버레이
-// ────────────────────────────────────────────────────
 function drawPauseButton() {
   let bx = width - 72, by = 12, bw = 60, bh = 28;
   let hover = mouseX > bx && mouseX < bx + bw && mouseY > by && mouseY < by + bh;
@@ -84,9 +76,7 @@ function drawPauseOverlay() {
   noStroke(); fill(80, 90, 100); textSize(10); textAlign(CENTER, CENTER); text("↑↓ 방향키  |  Enter로 실행", width / 2, py + ph - 16);
 }
 
-// ────────────────────────────────────────────────────
 // 보스 퀴즈 화면
-// ────────────────────────────────────────────────────
 function drawBossLives(cx, cy, blackholeRadius) {
   if (bossLivesLostAnim > 0) bossLivesLostAnim--;
   let liveY = cy - blackholeRadius * 1.55;
@@ -170,9 +160,7 @@ function drawBossCave(cx, cy, cw, ch, label, accentCol, isActive, sublabel, hint
   pop();
 }
 
-// ────────────────────────────────────────────────────
 // 활자 경로 드로잉
-// ────────────────────────────────────────────────────
 function drawCharPath() {
   textAlign(CENTER, CENTER);
   for (let i = 0; i < chars.length; i++) {
