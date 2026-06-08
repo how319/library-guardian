@@ -45,9 +45,6 @@ function handleHiddenInput() {
       sfxTyping();
       caterpillar.eatCharAndGrow(chars[idx]);
       if (predator.active) predator.spd = max(STAGE_SPEEDS[stage] * 0.85, predator.spd - 0.04);
-    } else {
-      if (predator.active) predator.spd = min(9.0, predator.spd + 0.35);
-    }
     return;
   }
   if (state === 'boss_quiz') {
