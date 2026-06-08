@@ -241,5 +241,6 @@ function bgmUpdateForState(s, stageIdx) {
   else if (s === 'boss_quiz') bgmPlay('boss');
   else if (s === 'stage_clear') { bgmStop(); _bgmTrack = ''; bgmPlay('clear'); }
   else if (s.startsWith('ending')) bgmPlay('ending');
+  else if (s.startsWith('credits')) bgmPlay('fantasy');
   else if (s === 'gameover') bgmStop();
 }
