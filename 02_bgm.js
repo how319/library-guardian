@@ -1,15 +1,12 @@
-// ====================================================
 // 02_bgm.js — BGM 시스템
-// ====================================================
 
 let _bgmCtx = null, _bgmMaster = null, _bgmTrack = '', _bgmTimer = null;
 let _bgmPos = 0, _bgmLoopLen = 0, _bgmNotes = [], _bgmBeatBass = [], _bgmBeatPerc = [];
 let _bgmBeat = 0.5, _bgmScheduleAhead = 0.12, _bgmNextTime = 0, _bgmNoteIdx = 0;
 let _bgmLoopStart = 0, _bgmBeatsPerLoop = 16;
 
-// ────────────────────────────────────────────────────
 // 초기화 / 내부 헬퍼
-// ────────────────────────────────────────────────────
+
 function bgmInit() {
   if (_bgmCtx) { if (_bgmCtx.state === 'suspended') _bgmCtx.resume(); return; }
   _bgmCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -91,9 +88,8 @@ function _bgmScheduleTick() {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 트랙 데이터 로드
-// ────────────────────────────────────────────────────
+
 function _bgmLoad(trackName) {
   _bgmNotes = []; _bgmBeatBass = []; _bgmBeatPerc = [];
 
@@ -222,9 +218,8 @@ function _bgmLoad(trackName) {
   }
 }
 
-// ────────────────────────────────────────────────────
 // 공개 API
-// ────────────────────────────────────────────────────
+
 function bgmPlay(trackName) {
   bgmInit(); if (_bgmCtx.state === 'suspended') _bgmCtx.resume();
   if (_bgmTrack === trackName) return;
