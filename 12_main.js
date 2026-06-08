@@ -40,6 +40,9 @@ function draw() {
   else if (state === 'ending_3')         drawEnding3();
   else if (state === 'ending_4')         drawEnding4();
   else if (state === 'ending_5')         drawEnding5();
+  else if (state === 'credits_1')        drawCredits1();
+  else if (state === 'credits_2')        drawCredits2();
+  else if (state === 'credits_3')        drawCredits3();
   pop(); resetMatrix(); handleFade();
 }
 
